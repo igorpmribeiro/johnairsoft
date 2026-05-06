@@ -9,7 +9,7 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto&family=Aldrich&family=Black+Ops+One:wght@400;500;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -27,6 +27,8 @@
             --color-text-dark: #2a2a2a;
             --font-heading: 'Bebas Neue', sans-serif;
             --font-body: 'Roboto', sans-serif;
+            --font-hero-heading: 'Black Ops One', sans-serif;
+            --font-body-alternate: 'Aldrich', sans-serif;
             /* Largura máxima do conteúdo da página (centralização em telas grandes) */
             --page-max-width: 1440px;
         }
@@ -234,7 +236,7 @@
         }
 
         .hero-title {
-            font-family: var(--font-heading);
+            font-family: var(--font-hero-heading);
             font-size: clamp(2.8rem, 6vw, 5rem);
             line-height: 0.9;
             margin-bottom: 1rem;
@@ -248,6 +250,7 @@
             margin-bottom: 2rem;
             /* Contraste melhorado (era #ddd) */
             color: #ececec;
+            font-family: var(--font-body-alternate);
         }
 
         .btn-primary {
@@ -679,7 +682,7 @@
             </ul>
 
             <div class="kit-banner">
-                <i class="fa-solid fa-helmet-safety" aria-hidden="true"></i> PRONTO PARA A AÇÃO!
+                <i class="fa-solid fa-gun"></i> PRONTO PARA A AÇÃO!
             </div>
         </div>
 
