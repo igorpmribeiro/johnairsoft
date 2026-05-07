@@ -101,8 +101,10 @@
             html { scroll-behavior: auto; }
             .reveal,
             .reveal.active,
-            .hero-half,
-            .btn-primary,
+            .hero-card,
+            .hero-card img,
+            .kit-card,
+            .kit-card img,
             .btn-header,
             .btn-dark {
                 transition: none !important;
@@ -192,208 +194,64 @@
 
         .btn-header:hover { background-color: var(--color-green-light); }
 
-        /* ================= HERO SPLIT ================= */
+        /* ================= HERO (imagens clicáveis) ================= */
         .hero-section {
+            background-color: var(--color-dark);
+            padding: clamp(1rem, 3vw, 2rem);
+        }
+
+        .hero-frame {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(123, 136, 90, 0.25);
+        }
+
+        .hero-card {
+            display: block;
             position: relative;
-            min-height: 80vh;
-            background-color: var(--color-green);
-            display: flex;
             overflow: hidden;
         }
 
-        .hero-half {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            /* Overlap reduzido (era +40px → linha divisória ~80px). Agora ~24px */
-            width: calc(50% + 12px);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: clamp(2rem, 5vw, 5rem);
-            background-size: cover;
-            background-position: center;
-            background-blend-mode: overlay;
-            background-color: rgba(0, 0, 0, 0.6);
+        .hero-card + .hero-card {
+            border-left: 3px solid var(--color-green);
+        }
+
+        .hero-card img {
+            width: 100%;
+            height: auto;
+            display: block;
             transition: transform 0.5s ease;
         }
 
-        .hero-half:hover { transform: scale(1.02); z-index: 10; }
+        .hero-card:hover img { transform: scale(1.03); }
 
-        .hero-left {
-            left: 0;
-            /* Diagonal mais fina: ~24px (era 80px) */
-            clip-path: polygon(0 0, calc(100% - 4px) 0, calc(100% - 28px) 100%, 0 100%);
-            background-image: url('https://images.unsplash.com/photo-1542158864-42b8fb7b29a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
-        }
-
-        .hero-right {
-            right: 0;
-            clip-path: polygon(28px 0, 100% 0, 100% 100%, 4px 100%);
-            background-image: url('https://images.unsplash.com/photo-1595590424283-b8f1784cb2c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80');
-            align-items: flex-start;
-            padding-left: clamp(2.5rem, 7vw, 8rem);
-        }
-
-        .hero-title {
-            font-family: var(--font-hero-heading);
-            font-size: clamp(2.8rem, 6vw, 5rem);
-            line-height: 0.9;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-        }
-
-        .hero-desc {
-            font-size: clamp(0.95rem, 1.5vw, 1.1rem);
-            line-height: 1.5;
-            max-width: 320px;
-            margin-bottom: 2rem;
-            /* Contraste melhorado (era #ddd) */
-            color: #ececec;
-            font-family: var(--font-body-alternate);
-        }
-
-        .btn-primary {
-            background-color: var(--color-green);
-            color: #fff;
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
-            padding: 12px 32px;
-            letter-spacing: 1.5px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            border: 2px solid var(--color-text-light);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
-            transition: background-color 0.25s ease,
-                        transform 0.25s ease,
-                        box-shadow 0.25s ease,
-                        border-color 0.25s ease;
-            cursor: pointer;
-            align-self: flex-start;
-        }
-        .btn-primary::after {
-            content: '\f061'; /* fa-arrow-right */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            font-size: 0.9rem;
-            transition: transform 0.25s ease;
-        }
-        .btn-primary:hover {
-            background-color: var(--color-green-dark);
-            border-color: var(--color-green-light);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
-        }
-        .btn-primary:hover::after { transform: translateX(4px); }
-        .btn-primary:active { transform: translateY(0); }
-
-        /* ================= KIT SECTION ================= */
+        /* ================= KIT SECTION (imagem clicável) ================= */
         .kit-section {
-            background-color: var(--color-sand);
-            color: var(--color-text-dark);
-            padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 4vw, 4rem);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+            background-color: var(--color-dark);
+            padding: clamp(1rem, 3vw, 2rem);
         }
 
-        .kit-content h2 {
-            font-family: var(--font-heading);
-            font-size: clamp(2.8rem, 5vw, 4.5rem);
-            line-height: 1;
-            color: var(--color-dark);
-        }
-
-        .kit-content h3 {
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            color: var(--color-green-dark);
-            margin-bottom: 1.5rem;
-        }
-
-        .kit-content > p {
-            font-size: 1rem;
-            color: #3a3a3a;
-            margin-bottom: 2rem;
-            max-width: 400px;
-            line-height: 1.5;
-        }
-
-        .kit-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin-bottom: 3rem;
-        }
-
-        .kit-item {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .kit-item i {
-            font-size: 1.8rem;
-            color: var(--color-dark);
-            width: 40px;
-            text-align: center;
-        }
-
-        .kit-item-text h4 {
-            font-family: var(--font-heading);
-            font-size: 1.4rem;
-            letter-spacing: 1px;
-        }
-
-        .kit-item-text p {
-            font-size: 0.9rem;
-            color: #4a4a4a;
-        }
-
-        .kit-banner {
-            background-color: var(--color-green-dark);
-            color: white;
-            padding: 15px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            letter-spacing: 1px;
-            max-width: 400px;
-        }
-
-        .kit-image-wrapper {
-            position: relative;
-        }
-
-        .kit-image-wrapper img {
-            filter: drop-shadow(5px 15px 10px rgba(0,0,0,0.3));
-        }
-
-        .badge {
-            position: absolute;
-            bottom: 20px;
-            right: 0;
-            background-color: var(--color-green-dark);
-            color: white;
-            padding: 20px;
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            line-height: 1.1;
-            text-align: center;
-            transform: rotate(-5deg);
-            box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
-        }
-
-        .badge-sub {
+        .kit-card {
             display: block;
-            font-size: 1rem;
-            color: var(--color-sand);
-            margin-top: 4px;
+            width: 100%;
+            overflow: hidden;
+            border-radius: 6px;
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+            border: 1px solid rgba(123, 136, 90, 0.25);
+            transition: transform 0.35s ease, box-shadow 0.35s ease;
         }
+
+        .kit-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .kit-card:hover img { transform: scale(1.02); }
 
         /* ================= FEATURES GALLERY ================= */
         .features-section {
@@ -558,18 +416,6 @@
 
         /* ================= RESPONSIVE ================= */
         @media (max-width: 1024px) {
-            .hero-section { flex-direction: column; min-height: auto; }
-            .hero-half {
-                position: relative;
-                width: 100%;
-                clip-path: none !important;
-                padding: 3.5rem 2rem;
-                min-height: 360px;
-            }
-            .hero-right { padding-left: 2rem; }
-            .kit-section { grid-template-columns: 1fr; gap: 2rem; }
-            .kit-image-wrapper { display: flex; justify-content: center; }
-            .badge { position: relative; display: inline-block; bottom: 0; right: 0; transform: rotate(-5deg); margin-top: 20px; }
             .features-grid { grid-template-columns: repeat(2, 1fr); }
             .cta-banner { flex-direction: column; text-align: center; }
             .cta-text { flex-direction: column; gap: 12px; }
@@ -578,16 +424,21 @@
         @media (max-width: 768px) {
             header { flex-direction: column; gap: 15px; padding: 1rem; }
             nav ul { flex-wrap: wrap; justify-content: center; gap: 1rem; }
-            .btn-primary { align-self: stretch; justify-content: center; }
+            .hero-frame {
+                grid-template-columns: 1fr;
+            }
+            .hero-card + .hero-card {
+                border-left: none;
+                border-top: 3px solid var(--color-green);
+            }
             .features-grid { grid-template-columns: 1fr; }
             footer { flex-direction: column; gap: 15px; text-align: center; }
             .socials { flex-direction: column; gap: 0.75rem; align-items: center; }
         }
 
         @media (max-width: 480px) {
-            .hero-half { padding: 2.5rem 1.25rem; min-height: 320px; }
-            .kit-section { padding-left: 1rem; padding-right: 1rem; }
-            .kit-banner { font-size: 1.2rem; }
+            .hero-section { padding: 0.75rem; }
+            .kit-section { padding: 0.75rem; }
         }
     </style>
 </head>
@@ -631,65 +482,21 @@
 
     <!-- Hero Section -->
     <section class="hero-section reveal" aria-label="Modalidades de jogo">
-        <article class="hero-half hero-left">
-            <h1 class="hero-title">JOGOS<br>ABERTOS</h1>
-            <p class="hero-desc">Participe dos jogos com outros jogadores!<br>Novas amizades e muita ação!</p>
-            <a href="#" class="btn-primary" aria-label="Saiba mais sobre Jogos Abertos">SAIBA MAIS</a>
-        </article>
-        <article class="hero-half hero-right">
-            <h1 class="hero-title">JOGOS<br>FECHADOS</h1>
-            <p class="hero-desc">Traga seu grupo e tenha uma experiência exclusiva!<br>Estratégia, adrenalina e diversão só para vocês.</p>
-            <a href="#" class="btn-primary" aria-label="Saiba mais sobre Jogos Fechados">SAIBA MAIS</a>
-        </article>
+        <div class="hero-frame">
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20participar%20dos%20jogos%20abertos." class="hero-card" target="_blank" rel="noopener" aria-label="Jogos Abertos - Fale conosco no WhatsApp">
+                <img src="assets/jogos-abertos.jpeg" alt="Jogos Abertos - Aqui você se diverte muito e faz novas amizades. Clique e acesse o grupo de lista.">
+            </a>
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20reservar%20um%20jogo%20fechado." class="hero-card" target="_blank" rel="noopener" aria-label="Jogos Fechados - Reserve no WhatsApp">
+                <img src="assets/jogos-fechados.jpeg" alt="Jogos Fechados - Sua equipe, suas regras, sua missão. Clique e reserve seu jogo fechado.">
+            </a>
+        </div>
     </section>
 
     <!-- Kit Section -->
-    <section class="kit-section reveal" aria-labelledby="kit-titulo">
-        <div class="kit-content">
-            <h2 id="kit-titulo">KIT DE JOGO</h2>
-            <h3>PARA JOGADORES CASUAIS</h3>
-            <p>Alugue seu equipamento completo e entre no jogo com segurança e qualidade!</p>
-
-            <ul class="kit-list">
-                <li class="kit-item">
-                    <i class="fa-solid fa-person-rifle" aria-hidden="true"></i>
-                    <div class="kit-item-text">
-                        <h4>RÉPLICA ELÉTRICA</h4>
-                        <p>Modelos de alta qualidade</p>
-                    </div>
-                </li>
-                <li class="kit-item">
-                    <i class="fa-solid fa-mask" aria-hidden="true"></i>
-                    <div class="kit-item-text">
-                        <h4>MÁSCARA DE PROTEÇÃO</h4>
-                        <p>Segurança garantida</p>
-                    </div>
-                </li>
-                <li class="kit-item">
-                    <i class="fa-solid fa-vest" aria-hidden="true"></i>
-                    <div class="kit-item-text">
-                        <h4>COLETE TÁTICO</h4>
-                        <p>Conforto e proteção</p>
-                    </div>
-                </li>
-                <li class="kit-item">
-                    <i class="fa-solid fa-bottle-droplet" aria-hidden="true"></i>
-                    <div class="kit-item-text">
-                        <h4>BBs</h4>
-                        <p>Munição inclusa</p>
-                    </div>
-                </li>
-            </ul>
-
-            <div class="kit-banner">
-                <i class="fa-solid fa-gun"></i> PRONTO PARA A AÇÃO!
-            </div>
-        </div>
-
-        <div class="kit-image-wrapper">
-            <img src="https://images.unsplash.com/photo-1644062534882-9922eebf0927?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Kit completo de equipamentos de Airsoft com réplica, máscara e colete" loading="lazy">
-            <div class="badge" aria-label="Aluguel completo: é só chegar e jogar">ALUGUEL<br>COMPLETO<br><span class="badge-sub">É SÓ CHEGAR<br>E JOGAR!</span></div>
-        </div>
+    <section class="kit-section reveal" aria-label="Kit de Iniciante">
+        <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20alugar%20o%20Kit%20de%20Iniciante." class="kit-card" target="_blank" rel="noopener" aria-label="Kit de Iniciante - Fale conosco no WhatsApp">
+            <img src="assets/kit-iniciante.jpeg" alt="Kit de Iniciante - Tudo que você precisa para começar no Airsoft: réplica, óculos e máscara, colete tático e BBs. Pronto para a ação!" loading="lazy">
+        </a>
     </section>
 
     <!-- Features / Gallery -->
