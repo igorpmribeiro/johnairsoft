@@ -58,7 +58,6 @@
         }
 
         /* Centralização da página em telas grandes — body escuro vira gutter lateral */
-        header,
         main,
         footer {
             max-width: var(--page-max-width);
@@ -125,37 +124,33 @@
         header {
             background-color: #111;
             padding: 1rem clamp(1rem, 4vw, 4rem);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1.5rem;
-            flex-wrap: wrap;
             position: sticky;
             top: 0;
             z-index: 100;
             border-bottom: 2px solid #222;
         }
 
+        .header-inner {
+            max-width: var(--page-max-width);
+            margin-inline: auto;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-family: var(--font-heading);
-            font-size: 2rem;
-            letter-spacing: 1px;
-            color: var(--color-text-light);
+            line-height: 0;
         }
 
-        .logo i {
-            font-size: 2.2rem;
-            color: var(--color-text-light);
-        }
-
-        .logo-text span {
+        .logo img {
+            height: clamp(72px, 12vw, 120px);
+            width: auto;
             display: block;
-            color: var(--color-green);
-            font-size: 1.2rem;
-            margin-top: -8px;
         }
 
         nav ul {
@@ -343,6 +338,57 @@
 
         /* ================= CTA BANNER ================= */
         .cta-banner {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cta-info {
+            background-color: var(--color-dark);
+            padding: clamp(2.5rem, 5vw, 4rem) clamp(1.25rem, 4vw, 4rem);
+        }
+
+        .cta-info-inner {
+            max-width: 880px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .cta-info-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+            margin-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+            flex-wrap: wrap;
+        }
+
+        .cta-info-header::before,
+        .cta-info-header::after {
+            content: '';
+            height: 2px;
+            width: clamp(28px, 5vw, 60px);
+            background-color: var(--color-green-light);
+        }
+
+        .cta-info h3 {
+            font-family: var(--font-heading);
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            color: var(--color-sand);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .cta-info p {
+            font-size: clamp(0.95rem, 1.4vw, 1.05rem);
+            line-height: 1.7;
+            color: #e8e6dd;
+        }
+
+        .cta-info p + p {
+            margin-top: 1rem;
+        }
+
+        .cta-row {
             background-color: var(--color-green-dark);
             padding: 2rem clamp(1.25rem, 4vw, 4rem);
             display: flex;
@@ -469,12 +515,13 @@
         /* ================= RESPONSIVE ================= */
         @media (max-width: 1024px) {
             .features-grid { grid-template-columns: repeat(2, 1fr); }
-            .cta-banner { flex-direction: column; text-align: center; }
+            .cta-row { flex-direction: column; text-align: center; }
             .cta-text { flex-direction: column; gap: 12px; }
         }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; padding: 1rem; }
+            header { padding: 1rem; }
+            .header-inner { flex-direction: column; gap: 15px; }
             nav ul { flex-wrap: wrap; justify-content: center; gap: 1rem; }
             .hero-frame {
                 grid-template-columns: 1fr;
@@ -500,11 +547,12 @@
 
     <!-- Header (versão atual: apenas logo + CTA, sem nav) -->
     <header>
-        <a href="#" class="logo" aria-label="Airsoft Campo - Página inicial">
-            <i class="fa-solid fa-crosshairs" aria-hidden="true"></i>
-            <span class="logo-text">AIRSOFT<span>CAMPO</span></span>
-        </a>
-        <a href="#" class="btn-header"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> COMO CHEGAR</a>
+        <div class="header-inner">
+            <a href="#" class="logo" aria-label="John Airsoft - Página inicial">
+                <img src="assets/logo.png" alt="John Airsoft" width="1254" height="1254" fetchpriority="high" decoding="async">
+            </a>
+            <a href="#" class="btn-header"><i class="fa-solid fa-location-dot" aria-hidden="true"></i> COMO CHEGAR</a>
+        </div>
     </header>
 
     <!--
@@ -512,9 +560,8 @@
         quando houver outras páginas (Sobre, Regras, Estrutura, Galeria, Contato).
 
     <header>
-        <a href="#" class="logo" aria-label="Airsoft Campo - Página inicial">
-            <i class="fa-solid fa-crosshairs" aria-hidden="true"></i>
-            <span class="logo-text">AIRSOFT<span>CAMPO</span></span>
+        <a href="#" class="logo" aria-label="John Airsoft - Página inicial">
+            <img src="assets/logo.png" alt="John Airsoft" width="1254" height="1254" fetchpriority="high" decoding="async">
         </a>
         <nav aria-label="Menu principal">
             <ul>
@@ -536,10 +583,10 @@
     <section class="hero-section reveal" aria-label="Modalidades de jogo">
         <div class="hero-frame">
             <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20participar%20dos%20jogos%20abertos." class="hero-card" target="_blank" rel="noopener" aria-label="Jogos Abertos - Fale conosco no WhatsApp">
-                <img src="assets/jogos-abertos.jpeg" alt="Jogos Abertos - Aqui você se diverte muito e faz novas amizades. Clique e acesse o grupo de lista." width="1045" height="1506" fetchpriority="high" decoding="async">
+                <img src="assets/jogos-abertos-v2.jpeg" alt="Jogos Abertos - Aqui você se diverte muito e faz novas amizades. Clique e acesse o grupo de lista." width="1086" height="1448" fetchpriority="high" decoding="async">
             </a>
             <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20reservar%20um%20jogo%20fechado." class="hero-card" target="_blank" rel="noopener" aria-label="Jogos Fechados - Reserve no WhatsApp">
-                <img src="assets/jogos-fechados.jpeg" alt="Jogos Fechados - Sua equipe, suas regras, sua missão. Clique e reserve seu jogo fechado." width="1045" height="1506" fetchpriority="high" decoding="async">
+                <img src="assets/jogos-fechados-v2.jpeg" alt="Jogos Fechados - Sua equipe, suas regras, sua missão. Clique e reserve seu jogo fechado." width="1086" height="1448" fetchpriority="high" decoding="async">
             </a>
         </div>
     </section>
@@ -547,7 +594,7 @@
     <!-- Kit Section -->
     <section class="kit-section reveal" aria-label="Kit de Iniciante">
         <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20alugar%20o%20Kit%20de%20Iniciante." class="kit-card" target="_blank" rel="noopener" aria-label="Kit de Iniciante - Fale conosco no WhatsApp">
-            <img src="assets/kit-iniciante.jpeg" alt="Kit de Iniciante - Tudo que você precisa para começar no Airsoft: réplica, óculos e máscara, colete tático e BBs. Pronto para a ação!" width="1600" height="825" loading="lazy" decoding="async">
+            <img src="assets/kit-aluguel.jpeg" alt="Kit de Iniciante - Tudo que você precisa para começar no Airsoft: réplica, óculos e máscara, colete tático e BBs. Pronto para a ação!" width="1600" height="825" loading="lazy" decoding="async">
         </a>
     </section>
 
@@ -585,15 +632,28 @@
     </section>
 
     <!-- CTA Banner -->
-    <section class="cta-banner reveal" aria-label="Entre em contato">
-        <div class="cta-text">
-            <i class="fa-solid fa-star" aria-hidden="true"></i>
-            <div>
-                <h2>VENHA VIVER ESSA EXPERIÊNCIA!</h2>
-                <p>AIRSOFT É MAIS QUE UM JOGO, É UM ESTILO DE VIDA!</p>
+    <section class="cta-banner reveal" aria-labelledby="cta-info-titulo">
+        <div class="cta-info">
+            <div class="cta-info-inner">
+                <div class="cta-info-header">
+                    <h3 id="cta-info-titulo">O QUE É O AIRSOFT?</h3>
+                </div>
+                <p>O airsoft é um esporte de ação e estratégia que simula operações táticas e cenários de combate utilizando equipamentos de pressão que disparam pequenas esferas plásticas biodegradáveis chamadas BBs. Muito mais do que apenas “atirar”, o airsoft envolve trabalho em equipe, comunicação, raciocínio rápido, disciplina e adrenalina.</p>
+                <p>Os jogadores participam de missões e objetivos variados, como captura de bandeira, resgate de reféns, desarme de bombas, conquista de território e operações militares simuladas. Cada partida pode ser casual e divertida ou extremamente imersiva, no estilo milsim (simulação militar), onde estratégia e organização fazem toda a diferença.</p>
+                <p>O esporte é praticado com equipamentos de proteção obrigatórios, como óculos e máscaras, garantindo segurança durante os jogos. Existem diferentes estilos de jogadores, desde iniciantes que alugam equipamentos para se divertir com amigos até equipes competitivas e operadores experientes.</p>
+                <p>Além da adrenalina, o airsoft também é conhecido por criar amizades, incentivar o espírito de equipe e proporcionar experiências únicas em campos temáticos, ambientes urbanos, florestas e arenas táticas.</p>
             </div>
         </div>
-        <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20Airsoft%20Campo." class="btn-dark" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">FALE CONOSCO <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        <div class="cta-row">
+            <div class="cta-text">
+                <i class="fa-solid fa-star" aria-hidden="true"></i>
+                <div>
+                    <h2>VENHA VIVER ESSA EXPERIÊNCIA!</h2>
+                    <p>AIRSOFT É MAIS QUE UM JOGO, É UM ESTILO DE VIDA!</p>
+                </div>
+            </div>
+            <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20Airsoft%20Campo." class="btn-dark" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">FALE CONOSCO <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        </div>
     </section>
 
     </main>
