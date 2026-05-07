@@ -14,6 +14,13 @@
     <!-- FontAwesome (Icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Fallback caso JavaScript esteja desabilitado: garante que conteúdo apareça sem reveal animations -->
+    <noscript>
+        <style>
+            .reveal { opacity: 1 !important; transform: none !important; }
+        </style>
+    </noscript>
+
     <style>
         /* ================= VARIABLES & RESET ================= */
         :root {
@@ -289,53 +296,49 @@
         .features-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
+            gap: clamp(1.25rem, 2vw, 2rem);
         }
 
         .feature-card {
-            background-color: transparent;
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(123, 136, 90, 0.18);
+            border-radius: 6px;
+            padding: clamp(1.5rem, 2.5vw, 2rem) 1.25rem;
+            transition: border-color 0.25s ease, transform 0.25s ease, background-color 0.25s ease;
         }
 
-        .feature-img-wrapper {
-            position: relative;
-            margin-bottom: 3rem;
-        }
-
-        .feature-img-wrapper img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            border: 2px solid var(--color-dark);
+        .feature-card:hover {
+            border-color: var(--color-green);
+            background-color: rgba(123, 136, 90, 0.08);
+            transform: translateY(-3px);
         }
 
         .feature-icon {
-            position: absolute;
-            bottom: -25px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 50px;
+            width: 64px;
+            height: 64px;
             background-color: var(--color-green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            border: 3px solid var(--color-dark-gray);
+            font-size: 1.7rem;
+            color: #fff;
+            margin: 0 auto 1.25rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
         }
 
         .feature-card h3 {
             font-family: var(--font-heading);
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             color: var(--color-green-light);
             margin-bottom: 10px;
             letter-spacing: 1px;
         }
 
         .feature-card p {
-            font-size: 0.9rem;
+            font-size: 0.95rem;
             color: #c4c4c4;
-            line-height: 1.5;
+            line-height: 1.55;
         }
 
         /* ================= CTA BANNER ================= */
@@ -386,6 +389,55 @@
             transition: background 0.3s;
         }
         .btn-dark:hover { background-color: #000; }
+
+        /* ================= FLOATING WHATSAPP CTA ================= */
+        .wa-float {
+            position: fixed;
+            right: clamp(1rem, 3vw, 1.75rem);
+            bottom: clamp(1rem, 3vw, 1.75rem);
+            z-index: 110;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: #fff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.85rem;
+            box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45),
+                        0 2px 6px rgba(0, 0, 0, 0.3);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+        }
+
+        .wa-float:hover {
+            background-color: #1ebe57;
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 28px rgba(37, 211, 102, 0.55),
+                        0 4px 10px rgba(0, 0, 0, 0.35);
+        }
+
+        .wa-float::before {
+            content: '';
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            border: 2px solid rgba(37, 211, 102, 0.6);
+            animation: wa-pulse 2.4s ease-out infinite;
+        }
+
+        @keyframes wa-pulse {
+            0%   { transform: scale(0.85); opacity: 0.9; }
+            70%  { transform: scale(1.25); opacity: 0; }
+            100% { transform: scale(1.25); opacity: 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .wa-float, .wa-float::before {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
 
         /* ================= FOOTER ================= */
         footer {
@@ -484,10 +536,10 @@
     <section class="hero-section reveal" aria-label="Modalidades de jogo">
         <div class="hero-frame">
             <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20participar%20dos%20jogos%20abertos." class="hero-card" target="_blank" rel="noopener" aria-label="Jogos Abertos - Fale conosco no WhatsApp">
-                <img src="assets/jogos-abertos.jpeg" alt="Jogos Abertos - Aqui você se diverte muito e faz novas amizades. Clique e acesse o grupo de lista.">
+                <img src="assets/jogos-abertos.jpeg" alt="Jogos Abertos - Aqui você se diverte muito e faz novas amizades. Clique e acesse o grupo de lista." width="1045" height="1506" fetchpriority="high" decoding="async">
             </a>
             <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20reservar%20um%20jogo%20fechado." class="hero-card" target="_blank" rel="noopener" aria-label="Jogos Fechados - Reserve no WhatsApp">
-                <img src="assets/jogos-fechados.jpeg" alt="Jogos Fechados - Sua equipe, suas regras, sua missão. Clique e reserve seu jogo fechado.">
+                <img src="assets/jogos-fechados.jpeg" alt="Jogos Fechados - Sua equipe, suas regras, sua missão. Clique e reserve seu jogo fechado." width="1045" height="1506" fetchpriority="high" decoding="async">
             </a>
         </div>
     </section>
@@ -495,7 +547,7 @@
     <!-- Kit Section -->
     <section class="kit-section reveal" aria-label="Kit de Iniciante">
         <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20alugar%20o%20Kit%20de%20Iniciante." class="kit-card" target="_blank" rel="noopener" aria-label="Kit de Iniciante - Fale conosco no WhatsApp">
-            <img src="assets/kit-iniciante.jpeg" alt="Kit de Iniciante - Tudo que você precisa para começar no Airsoft: réplica, óculos e máscara, colete tático e BBs. Pronto para a ação!" loading="lazy">
+            <img src="assets/kit-iniciante.jpeg" alt="Kit de Iniciante - Tudo que você precisa para começar no Airsoft: réplica, óculos e máscara, colete tático e BBs. Pronto para a ação!" width="1600" height="825" loading="lazy" decoding="async">
         </a>
     </section>
 
@@ -507,37 +559,25 @@
 
         <div class="features-grid">
             <article class="feature-card">
-                <div class="feature-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1595590424283-b8f1784cb2c8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="" loading="lazy">
-                    <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-users"></i></div>
-                </div>
+                <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-users"></i></div>
                 <h3>AMIZADE E UNIÃO</h3>
                 <p>Um esporte que aproxima pessoas e cria grandes amizades.</p>
             </article>
 
             <article class="feature-card">
-                <div class="feature-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1542158864-42b8fb7b29a0?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="" loading="lazy">
-                    <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-crosshairs"></i></div>
-                </div>
+                <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-crosshairs"></i></div>
                 <h3>ESTRATÉGIA E AÇÃO</h3>
                 <p>Planeje, comunique-se e vença! Cada jogo é um novo desafio.</p>
             </article>
 
             <article class="feature-card">
-                <div class="feature-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="" loading="lazy">
-                    <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-tree"></i></div>
-                </div>
+                <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-tree"></i></div>
                 <h3>CONTATO COM A NATUREZA</h3>
                 <p>Um campo completo em meio à natureza para você viver grandes momentos.</p>
             </article>
 
             <article class="feature-card">
-                <div class="feature-img-wrapper">
-                    <img src="https://images.unsplash.com/photo-1533560904424-a0c61dc306fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="" loading="lazy">
-                    <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-face-smile"></i></div>
-                </div>
+                <div class="feature-icon" aria-hidden="true"><i class="fa-solid fa-face-smile"></i></div>
                 <h3>DIVERSÃO GARANTIDA</h3>
                 <p>Adrenalina, risadas e muita emoção do começo ao fim do jogo!</p>
             </article>
@@ -553,10 +593,15 @@
                 <p>AIRSOFT É MAIS QUE UM JOGO, É UM ESTILO DE VIDA!</p>
             </div>
         </div>
-        <a href="#" class="btn-dark" aria-label="Fale conosco pelo WhatsApp">FALE CONOSCO <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
+        <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20Airsoft%20Campo." class="btn-dark" target="_blank" rel="noopener" aria-label="Fale conosco pelo WhatsApp">FALE CONOSCO <i class="fa-brands fa-whatsapp" aria-hidden="true"></i></a>
     </section>
 
     </main>
+
+    <!-- Floating WhatsApp CTA -->
+    <a href="https://wa.me/5511999999999?text=Ol%C3%A1!%20Quero%20saber%20mais%20sobre%20o%20Airsoft%20Campo." class="wa-float" target="_blank" rel="noopener" aria-label="Fale com o Airsoft Campo no WhatsApp">
+        <i class="fa-brands fa-whatsapp" aria-hidden="true"></i>
+    </a>
 
     <!-- Footer -->
     <footer>
