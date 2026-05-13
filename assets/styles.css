@@ -12,7 +12,7 @@
     --font-body: 'Roboto', sans-serif;
     --font-hero-heading: 'Black Ops One', sans-serif;
     --font-body-alternate: 'Aldrich', sans-serif;
-    --page-max-width: 1440px;
+    --page-max-width: 1300px;
 }
 
 * {
@@ -184,7 +184,7 @@ nav.primary ul li a.active::after {
 /* ================= HERO (home: imagens clicáveis) ================= */
 .hero-section {
     background-color: var(--color-dark);
-    padding: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1rem, 3vw, 2rem) 0;
 }
 
 .hero-frame {
@@ -218,7 +218,7 @@ nav.primary ul li a.active::after {
 /* ================= KIT SECTION (home) ================= */
 .kit-section {
     background-color: var(--color-dark);
-    padding: clamp(1rem, 3vw, 2rem);
+    padding: clamp(1rem, 3vw, 2rem) 0;
 }
 
 .kit-card {
@@ -334,7 +334,7 @@ nav.primary ul li a.active::after {
 }
 
 .cta-info-inner {
-    max-width: 880px;
+    max-width: 100%;
     margin: 0 auto;
     width: 100%;
 }
@@ -743,6 +743,7 @@ footer {
 @media (max-width: 768px) {
     header { padding: 1rem; }
     .header-inner { flex-direction: column; gap: 15px; }
+    .logo img { height: 130px; }
     nav.primary ul { gap: 0.85rem 1.25rem; font-size: 1.05rem; }
     .hero-frame { grid-template-columns: 1fr; }
     .hero-card + .hero-card {
@@ -755,7 +756,7 @@ footer {
 }
 
 @media (max-width: 480px) {
-    .hero-section { padding: 0.75rem; }
-    .kit-section { padding: 0.75rem; }
+    .hero-section { padding: 0.75rem 0; }
+    .kit-section { padding: 0.75rem 0; }
     .page-hero { padding-top: 2.5rem; }
 }
