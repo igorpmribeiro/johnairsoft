@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    <url>
+        <loc>https://www.bootcampairsoft.com.br/</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://www.bootcampairsoft.com.br/assets/hero-bg-airsoft.jpeg</image:loc>
+            <image:title>Bootcamp Airsoft - Campo de Airsoft em Fortaleza</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://www.bootcampairsoft.com.br/assets/logo.png</image:loc>
+            <image:title>Logotipo Bootcamp Airsoft</image:title>
+        </image:image>
+    </url>
+
+    <url>
+        <loc>https://www.bootcampairsoft.com.br/sobre.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.bootcampairsoft.com.br/airsoft.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.bootcampairsoft.com.br/regras.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.bootcampairsoft.com.br/jogos-fechados.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.bootcampairsoft.com.br/kit-aluguel.html</loc>
+        <lastmod>2026-05-26</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+</urlset>

@@ -1,0 +1,16 @@
+# robots.txt - Bootcamp Airsoft
+# https://www.bootcampairsoft.com.br/
+
+User-agent: *
+Allow: /
+
+# Bloquear arquivos internos / não-públicos
+Disallow: /.git/
+Disallow: /.claude/
+Disallow: /.DS_Store
+Disallow: /espelho.jpeg
+
+# Permitir explicitamente assets (imagens, CSS, JS) para indexação
+Allow: /assets/
+
+Sitemap: https://www.bootcampairsoft.com.br/sitemap.xml
