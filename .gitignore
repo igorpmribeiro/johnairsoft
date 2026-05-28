@@ -2,6 +2,9 @@
 .claude/
 .playwright-mcp/
 
+# Credenciais de deploy (FTP)
+.env
+
 # Referências de design (não publicar)
 espelho.jpeg
 fun-section.png
