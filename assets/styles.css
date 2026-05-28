@@ -100,6 +100,14 @@ img { max-width: 100%; display: block; }
         transform: none !important;
         opacity: 1 !important;
     }
+    /* Drawer still needs its open/close transform, just no easing */
+    .header-collapse,
+    .nav-backdrop,
+    .nav-toggle-bars,
+    .nav-toggle-bars::before,
+    .nav-toggle-bars::after {
+        transition: none !important;
+    }
 }
 
 /* ================= HEADER ================= */
@@ -180,6 +188,62 @@ nav.primary ul li a.active::after {
 }
 
 .btn-header:hover { background-color: var(--color-green-light); }
+
+/* On desktop the collapse wrapper is transparent: nav + button lay out
+   as direct flex items of .header-inner, exactly like before. */
+.header-collapse { display: contents; }
+
+/* Hamburger button — hidden on desktop, shown via the mobile media query */
+.nav-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 46px;
+    flex: 0 0 auto;
+    background: transparent;
+    border: 1px solid #333;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+.nav-toggle:hover { border-color: var(--color-green); }
+.nav-toggle:focus-visible { outline: 3px solid var(--color-green-light); outline-offset: 2px; }
+
+.nav-toggle-bars,
+.nav-toggle-bars::before,
+.nav-toggle-bars::after {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.2s ease, background 0.2s ease;
+}
+.nav-toggle-bars { position: relative; }
+.nav-toggle-bars::before { position: absolute; left: 0; top: -7px; }
+.nav-toggle-bars::after { position: absolute; left: 0; top: 7px; }
+
+/* Animate bars into an "X" when the menu is open */
+header.nav-open .nav-toggle-bars { background: transparent; }
+header.nav-open .nav-toggle-bars::before { transform: translateY(7px) rotate(45deg); }
+header.nav-open .nav-toggle-bars::after { transform: translateY(-7px) rotate(-45deg); }
+
+/* Backdrop behind the off-canvas drawer (mobile only) */
+.nav-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    z-index: 150;
+    -webkit-backdrop-filter: blur(2px);
+    backdrop-filter: blur(2px);
+}
 
 /* ================= HERO MAIN (home) ================= */
 .hero-main {
@@ -920,6 +984,100 @@ footer {
 
 .socials a:hover { color: var(--color-green-light); }
 
+/* ============ HEADER MOBILE (off-canvas drawer) ============ */
+@media (max-width: 900px) {
+    header { padding: 0.6rem 1rem; }
+
+    .header-inner {
+        flex-wrap: nowrap;
+        gap: 1rem;
+    }
+
+    /* Compact logo so the header takes minimal vertical space */
+    .logo img { height: 56px; }
+
+    .nav-toggle { display: inline-flex; }
+    /* Keep the toggle above the drawer so it turns into a visible close (X) */
+    header.nav-open .nav-toggle {
+        position: relative;
+        z-index: 250;
+        border-color: var(--color-green);
+    }
+
+    /* The collapse wrapper becomes a real off-canvas panel */
+    .header-collapse {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100dvh;
+        width: min(82vw, 330px);
+        padding: calc(5.5rem + env(safe-area-inset-top)) calc(1.75rem + env(safe-area-inset-right)) calc(2rem + env(safe-area-inset-bottom)) 1.75rem;
+        background: #141414;
+        border-left: 2px solid var(--color-green);
+        box-shadow: -24px 0 60px rgba(0, 0, 0, 0.55);
+        transform: translateX(100%);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        z-index: 200;
+    }
+    header.nav-open .header-collapse { transform: translateX(0); }
+
+    .nav-backdrop { display: block; pointer-events: none; }
+    header.nav-open .nav-backdrop { opacity: 1; pointer-events: auto; }
+
+    /* Stack the nav links vertically inside the drawer */
+    nav.primary { width: 100%; }
+    nav.primary ul {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        justify-content: flex-start;
+        gap: 0;
+        font-size: 1.5rem;
+        width: 100%;
+    }
+    nav.primary ul li {
+        width: 100%;
+        border-bottom: 1px solid #262626;
+    }
+    nav.primary ul li:first-child { border-top: 1px solid #262626; }
+    nav.primary ul li a {
+        display: block;
+        width: 100%;
+        padding: 0.95rem 0;
+        padding-bottom: 0.95rem;
+        touch-action: manipulation;
+    }
+    /* Use a left accent bar for the active item instead of the underline */
+    nav.primary ul li a.active::after {
+        top: 50%;
+        bottom: auto;
+        left: -1.75rem;
+        width: 4px;
+        height: 60%;
+        transform: translateY(-50%);
+    }
+
+    /* CTA button sits at the bottom of the drawer, full width */
+    .header-collapse .btn-header {
+        margin-top: auto;
+        justify-content: center;
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 1.25rem;
+    }
+}
+
+/* Avoid a flash of the drawer transition during page load */
+@media (max-width: 900px) {
+    .header-collapse.no-anim { transition: none; }
+}
+
 /* ================= RESPONSIVE ================= */
 @media (max-width: 1024px) {
     .features-grid { grid-template-columns: repeat(2, 1fr); }
@@ -928,10 +1086,6 @@ footer {
 }
 
 @media (max-width: 768px) {
-    header { padding: 1rem; }
-    .header-inner { flex-direction: column; gap: 15px; }
-    .logo img { height: 130px; }
-    nav.primary ul { gap: 0.85rem 1.25rem; font-size: 1.05rem; }
     .hero-frame { grid-template-columns: 1fr; }
     .hero-card + .hero-card {
         border-left: none;
@@ -961,6 +1115,24 @@ footer {
     .hero-meta, .hero-actions { justify-content: center; }
     .hero-actions { width: 100%; flex-direction: column; align-items: stretch; }
     .hero-actions .btn-primary { justify-content: center; }
+}
+
+@media (max-width: 600px) {
+    /* Stack the decorative lines above/below the title so they stay
+       symmetric instead of one wrapping awkwardly to its own row */
+    .section-header {
+        flex-direction: column;
+        gap: 0.85rem;
+        margin-bottom: 2.5rem;
+    }
+    .section-header::before,
+    .section-header::after {
+        width: 56px;
+    }
+    .section-header h2 {
+        font-size: clamp(1.75rem, 8vw, 2.4rem);
+        line-height: 1.05;
+    }
 }
 
 @media (max-width: 480px) {
